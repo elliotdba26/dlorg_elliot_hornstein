@@ -1,6 +1,6 @@
 # .gitgnore
 ```bash
-echo "*.swp" > .gitignore
+echo "[._]*.sw[a-p]"  > .gitignore
 ```
-
+# Permissions
 chmod 700 dlorg
