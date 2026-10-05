@@ -6,3 +6,5 @@ echo "[._]*.sw[a-p]"  > .gitignore
 ```bash
 chmod +x dlorg
 ```
+# create dlorg script
+touch dlorg
