@@ -44,4 +44,4 @@ while IFS= read -r filename; do
 	mkdir -p "$downloads/$dir"
     mv --backup=numbered "$src" "$downloads/$dir/"
     echo "$filename -> $dir/"
-done
+done   
