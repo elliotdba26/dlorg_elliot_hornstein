@@ -29,13 +29,13 @@ chmod +x dlorg
 
 ![dlorg running](screenshots/running.png)
 
-## Try it
+## Tmux
 
 In a second terminal (or a tmux split, `Ctrl-b` then `%`):
 
 ```bash
 cd ~/Downloads
-touch notes.docx beautiful.jpg awesome_{1..3}.mp4 cool_{1..3}.pdf a.txt
+touch notes.docx beautiful.jpg coolu.png awesome_{1..3}.mp4 cool_{1..3}.pdf a.txt b.zip 123.mp3 321.pdf torrent.torrent
 ```
 
 ![dlorg moving files](screenshots/tmux-demo.png)
@@ -54,7 +54,7 @@ touch ~/Downloads/image.png              # images/ is recreated
 
 ```bash
 mkdir -p ~/.local/bin ~/.config/systemd/user
-ln -s "$(pwd)/dlorg" ~/.local/bin/dlorg
+ln -s "path_to/dlorg" ~/.local/bin/dlorg
 cp dlorg.service ~/.config/systemd/user/
 
 systemctl --user daemon-reload
