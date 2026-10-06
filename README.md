@@ -1,107 +1,73 @@
-# dlorg_elliot_hornstein
+# dlorg – Download Organizer
 
-Lab för DLORG
+Watches your `~/Downloads` folder and automatically sorts new files into
+subfolders by file type.
 
-# DLORG - Download Organizer
-Watches your `~/Downloads` folder and automatically moves new files into the right subfolder based on their extension.
+## How it works
 
-# What it does
-
-When a file is created, finished writing, or moved into `~/Downloads`, the script:
+dlorg uses `inotifywait` to watch `~/Downloads`. When a file is finished
+writing, is moved in, or is renamed there, it:
 
 1. Looks at the file extension
 2. Creates the target folder if it doesn't exist
 3. Moves the file there
 
-# Requirements
+## Requirements
+
 ```bash
-# inotify-tools
 sudo dnf install inotify-tools
 ```
 
-# How to run
-```bash
-vim dlorg
-# copy the contents from repo
-```
+## Quick start
 
 ```bash
-# Make sure the script is executable
+git clone https://github.com/elliotdba26/dlorg_elliot_hornstein.git
+cd dlorg_elliot_hornstein
 chmod +x dlorg
-
-# Run it
 ./dlorg
 ```
 
-You will see:
-```
-watching /home/you/Downloads
-```
-### Now open a tmux session
+![dlorg running](screenshots/running.png)
 
-1. Start tmux and split the window (`Ctrl-b` then `%`)
-2. In one pane run `./dlorg.`
-3. In the other pane go to Downloads and create test files:
+## Try it
+
+In a second terminal (or a tmux split, `Ctrl-b` then `%`):
 
 ```bash
 cd ~/Downloads
-touch notes.docx beautiful.jpg coolu.png awesome_{1..3}.mp4 cool_{1..3}.pdf a.txt b.txt 123.mp3 321.pdf torrent.torrent
+touch notes.docx beautiful.jpg awesome_{1..3}.mp4 cool_{1..3}.pdf a.txt
 ```
 
-You should see the files being moved and messages like:
+![dlorg moving files](screenshots/tmux-demo.png)
 
-```
-notes.docx -> docs/
-beautiful.jpg -> images/
-awesome_1.mp4 -> videos/
-```
-You can also `mv` files into Downloads from somewhere else.
+![sorted Downloads folder](screenshots/sorted.png)
+
+Moving files in works too, and deleted folders are recreated:
+
 ```bash
-mv ~/Desktop/text.txt ~/Downloads/
-# it should move into "text" folder
-```
-The `images/` folder is recreated automatically if it's removed, file is also moved.     
-```bash
+mv ~/Desktop/text.txt ~/Downloads/       # ends up in text/
 rm -r ~/Downloads/images
-touch ~/Downloads/image.png
-```
-Move file from host to linux. From a Windows terminal (Powershell or CMD)
-```bash
-scp "C:\Users\Administrator\Downloads\asd.gif" user@hostname:~/Downloads/ 
+touch ~/Downloads/image.png              # images/ is recreated
 ```
 
-### 1. Run as a background service
-
-Follow these steps to make dlorg start automatically with your user session.
-
-Symlink it into `~/.local/bin`
+## Run in the background (systemd)
 
 ```bash
-mkdir -p ~/.local/bin
-ln -s "path_to/dlorg" ~/.local/bin/dlorg
-```
-### 2. Create the unit file
-
-```bash
-mkdir -p ~/.config/systemd/user
+mkdir -p ~/.local/bin ~/.config/systemd/user
+ln -s "$(pwd)/dlorg" ~/.local/bin/dlorg
 cp dlorg.service ~/.config/systemd/user/
-```
-### 3. Reload, enable and start the service
 
-```bash
 systemctl --user daemon-reload
-systemctl --user enable dlorg.service
-systemctl --user start dlorg.service
+systemctl --user enable --now dlorg.service
 ```
 
-### 4. Check status
+Check status and watch it work live:
 
 ```bash
 systemctl --user status dlorg.service
+journalctl --user -u dlorg.service -f
 ```
-### Stop / disable later
 
-```bash
-systemctl --user stop dlorg.service
-systemctl --user disable dlorg.service
-```
+![service status](screenshots/service-status.png)
+
+Stop it with `systemctl --user disable --now dlorg.service`.
