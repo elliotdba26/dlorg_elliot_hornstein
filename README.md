@@ -60,7 +60,7 @@ You can also `mv` files into Downloads from somewhere else.
 mv ~/Desktop/text.txt ~/Downloads/
 # it should move into "text" folder
 ```
-The `images/` folder is recreated automatically and the file is moved.     
+The `images/` folder is recreated automatically if it's removed, file is also moved.     
 ```bash
 rm -r ~/Downloads/images
 touch ~/Downloads/image.png
@@ -68,4 +68,40 @@ touch ~/Downloads/image.png
 Move file from host to linux. From a Windows terminal (Powershell or CMD)
 ```bash
 scp "C:\Users\Administrator\Downloads\asd.gif" user@hostname:~/Downloads/ 
+```
+
+## Run as a background service (Task 3)
+
+Follow these steps to make dlorg start automatically with your user session.
+
+Symlink it into `~/.local/bin`
+
+```bash
+mkdir -p ~/.local/bin
+ln -s "path_to/dlorg" ~/.local/bin/dlorg
+```
+### 3. Create the unit file
+
+```bash
+mkdir -p ~/.config/systemd/user
+cp dlorg.service ~/.config/systemd/user/
+```
+### 4. Reload, enable and start the service
+
+```bash
+systemctl --user daemon-reload
+systemctl --user enable dlorg.service
+systemctl --user start dlorg.service
+```
+
+### 5. Check status
+
+```bash
+systemctl --user status dlorg.service
+```
+### Stop / disable later
+
+```bash
+systemctl --user stop dlorg.service
+systemctl --user disable dlorg.service
 ```
