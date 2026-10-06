@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+downloads="$HOME/Downloads"
+echo "watching $downloads"
+
+inotifywait -m -e close_write -e moved_to --format "%f" "$downloads" |
+while IFS= read -r filename; do
+    src="$downloads/$filename"
+    if [[ ! -f "$src" ]]; then
+        continue
+    fi
+    case "$filename" in
+    # Images
+    *.jpg|*.jpeg|*.png|*.webp|*.gif|*.bmp|*.svg|*.ico)
+	dir="images";;
+    # Videos
+    *.mp4|*.mkv|*.avi|*.mov|*.webm|*.flv|*.wmv)
+	dir="videos";;
+	# Music
+    *.mp3|*.flac|*.wav|*.aac|*.ogg|*.m4a)
+	dir="music";;
+	# PDFs
+	*.pdf)
+	dir="pdfs";;
+	# Documents
+	*.doc|*.docx|*.odt|*.rtf)
+	dir="docs";;
+	# Spreadsheets
+	*.xls|*.xlsx|*.ods|*.csv)
+	dir="spreadsheets";;
+	# Archives
+    *.zip|*.rar|*.7z|*.tar|*.gz|*.bz2|*.xz)
+	dir="archives";;
+	# Torrents
+    *.torrent)
+	dir="torrents";;
+    # Text files
+	*.txt|*.md|*.log)
+	dir="text";;
+	# Everything else
+    *) dir="other";;
+    esac
+    
+	mkdir -p "$downloads/$dir"
+    mv --backup=numbered "$src" "$downloads/$dir/"
+    echo "$filename -> $dir/"
+done
