@@ -70,7 +70,7 @@ Move file from host to linux. From a Windows terminal (Powershell or CMD)
 scp "C:\Users\Administrator\Downloads\asd.gif" user@hostname:~/Downloads/ 
 ```
 
-## Run as a background service (Task 3)
+### 1. Run as a background service (Task 3)
 
 Follow these steps to make dlorg start automatically with your user session.
 
@@ -80,13 +80,13 @@ Symlink it into `~/.local/bin`
 mkdir -p ~/.local/bin
 ln -s "path_to/dlorg" ~/.local/bin/dlorg
 ```
-### 3. Create the unit file
+### 2. Create the unit file
 
 ```bash
 mkdir -p ~/.config/systemd/user
 cp dlorg.service ~/.config/systemd/user/
 ```
-### 4. Reload, enable and start the service
+### 3. Reload, enable and start the service
 
 ```bash
 systemctl --user daemon-reload
@@ -94,7 +94,7 @@ systemctl --user enable dlorg.service
 systemctl --user start dlorg.service
 ```
 
-### 5. Check status
+### 4. Check status
 
 ```bash
 systemctl --user status dlorg.service
