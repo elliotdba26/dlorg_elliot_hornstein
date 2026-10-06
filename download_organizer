@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-echo $~/Downloads
-
-inotifywait -m -e close_write -e moved_to --format "%f" "~/Downloads" |
-while IFS= read -r filename; do
-    if [[ -f "~/Downloads/$filename" ]]; then
-
