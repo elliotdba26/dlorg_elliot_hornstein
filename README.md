@@ -70,7 +70,7 @@ Move file from host to linux. From a Windows terminal (Powershell or CMD)
 scp "C:\Users\Administrator\Downloads\asd.gif" user@hostname:~/Downloads/ 
 ```
 
-### 1. Run as a background service (Task 3)
+### 1. Run as a background service
 
 Follow these steps to make dlorg start automatically with your user session.
 
