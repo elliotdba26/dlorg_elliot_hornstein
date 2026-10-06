@@ -51,14 +51,19 @@ notes.docx -> docs/
 beautiful.jpg -> images/
 awesome_1.mp4 -> videos/
 ```
-# You can also `mv` files into Downloads from somewhere else.
+You can also `mv` files into Downloads from somewhere else.
+```bash
+mv text.txt ~/Downloads/
+# it should move back
+```
+The `images/` folder is recreated automatically and the file is moved.     
 ```bash
 rm -r ~/Downloads/images
 touch ~/Downloads/image.png
 ```
-# The `images/` folder is recreated automatically and the file is moved.
 
-# Move file from host to linux. From a Windows terminal (Powershell or CMD)
+Move file from host to linux. From a Windows terminal (Powershell or CMD)
 ```bash
 scp "C:\Users\Administrator\Downloads\asd.gif" user@hostname:~/Downloads/
 ```
+
