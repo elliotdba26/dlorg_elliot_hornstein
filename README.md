@@ -12,8 +12,24 @@ writing, is moved in, or is renamed there, it:
 2. Creates the target folder if it doesn't exist
 3. Moves the file there
 
-## Requirements
+## Where files go
 
+| Folder       | File types                               |
+| ------------ | ---------------------------------------- |
+| images       | jpg, jpeg, png, webp, gif, bmp, svg, ico |
+| videos       | mp4, mkv, avi, mov, webm, flv, wmv       |
+| music        | mp3, flac, wav, aac, ogg, m4a            |
+| pdfs         | pdf                                      |
+| docs         | doc, docx, odt, rtf                      |
+| spreadsheets | xls, xlsx, ods, csv                      |
+| archives     | zip, rar, 7z, tar, gz, bz2, xz           |
+| torrents     | torrent                                  |
+| text         | txt, md, log                             |
+| other        | everything else                          |
+
+
+## Requirements
+Linux 
 ```bash
 sudo dnf install inotify-tools
 ```
