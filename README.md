@@ -27,7 +27,6 @@ writing, is moved in, or is renamed there, it:
 | text         | txt, md, log                             |
 | other        | everything else                          |
 
-
 ## Requirements
 Linux 
 ```bash
