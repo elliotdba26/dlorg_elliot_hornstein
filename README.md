@@ -28,7 +28,7 @@ writing, is moved in, or is renamed there, it:
 | other        | everything else                          |
 
 ## Requirements
-Linux 
+`Linux`
 ```bash
 sudo dnf install inotify-tools
 ```
