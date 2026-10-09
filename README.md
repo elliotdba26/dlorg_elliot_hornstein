@@ -69,7 +69,7 @@ touch ~/Downloads/image.png              # images/ is recreated
 
 ```bash
 mkdir -p ~/.local/bin ~/.config/systemd/user
-ln -s "~/dlorg_elliot_hornstein/dlorg" ~/.local/bin/dlorg
+ln -s "$PWD/dlorg" ~/.local/bin/dlorg
 cp dlorg.service ~/.config/systemd/user/
 
 systemctl --user daemon-reload
